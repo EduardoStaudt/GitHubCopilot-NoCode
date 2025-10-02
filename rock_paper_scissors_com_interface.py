@@ -114,6 +114,12 @@ class RockPaperScissorsGUI:
                                 width=12, height=2)
         new_game_btn.pack(side=tk.LEFT, padx=8)
         
+        # Botão Reset - novo botão
+        reset_btn = tk.Button(control_frame, text="🔄 Reset", font=("Arial", 11, "bold"),
+                            command=self.reset_escolha, bg="lightyellow", activebackground="yellow",
+                            width=12, height=2)
+        reset_btn.pack(side=tk.LEFT, padx=8)
+        
         # Botão Sair - melhorado
         quit_btn = tk.Button(control_frame, text="❌ Sair", font=("Arial", 11, "bold"),
                             command=self.sair_jogo, bg="red", fg="white", activebackground="darkred",
@@ -166,6 +172,12 @@ class RockPaperScissorsGUI:
             return 1  # Jogador vence
         else:
             return -1  # Computador vence
+    
+    def reset_escolha(self):
+        """Reset apenas a escolha atual, mantendo o placar"""
+        self.player_choice_label.config(text="❓")
+        self.computer_choice_label.config(text="❓")
+        self.result_label.config(text="Faça sua escolha!", fg="blue")
     
     def resetar_placar(self):
         resposta = messagebox.askyesno("Resetar Placar", "Deseja realmente resetar o placar?")
