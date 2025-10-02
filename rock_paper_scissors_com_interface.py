@@ -21,7 +21,7 @@ class RockPaperScissorsGUI:
         """
         self.root = root
         self.root.title("Pedra, Papel e Tesoura")
-        self.root.geometry("700x450")  # Aumentar mais para comportar 4 botões
+        self.root.geometry("700x600")  # Aumentar altura para comportar todos os botões
         self.root.resizable(False, False)
         
         # Configurar comportamento ao fechar janela
@@ -105,14 +105,14 @@ class RockPaperScissorsGUI:
         # Label para resultado
         self.result_label = tk.Label(self.root, text="Faça sua escolha!", 
                                     font=("Arial", 14, "bold"), fg="blue")
-        self.result_label.pack(pady=20)
+        self.result_label.pack(pady=15)
         
         # Frame para botão de reset principal (mais proeminente)
         reset_main_frame = tk.Frame(self.root)
-        reset_main_frame.pack(pady=10)
+        reset_main_frame.pack(pady=8)
         
         # Botão principal de Novo Jogo (maior e mais visível)
-        new_game_main_btn = tk.Button(reset_main_frame, text="� NOVO JOGO", font=("Arial", 12, "bold"),
+        new_game_main_btn = tk.Button(reset_main_frame, text="🎮 NOVO JOGO", font=("Arial", 12, "bold"),
                                     command=self.novo_jogo, bg="#4CAF50", fg="white", 
                                     activebackground="#45a049", activeforeground="white",
                                     width=15, height=2, relief="raised", bd=3)
@@ -120,29 +120,29 @@ class RockPaperScissorsGUI:
         
         # Botões de controle secundários
         control_frame = tk.Frame(self.root)
-        control_frame.pack(pady=10)
+        control_frame.pack(pady=8)
         
         # Botão Reset Escolha
         reset_choice_btn = tk.Button(control_frame, text="🔄 Reset Rodada", font=("Arial", 9, "bold"),
-                                   command=self.reset_escolha, bg="lightyellow", activebackground="orange",
-                                   width=11, height=2)
+                                command=self.reset_escolha, bg="lightyellow", activebackground="orange",
+                                width=11, height=2)
         reset_choice_btn.pack(side=tk.LEFT, padx=5)
         
         # Botão Reset Placar
         reset_score_btn = tk.Button(control_frame, text="📊 Zerar Placar", font=("Arial", 9, "bold"),
-                                  command=self.resetar_placar_direto, bg="lightcyan", activebackground="cyan",
-                                  width=11, height=2)
+                                command=self.resetar_placar_direto, bg="lightcyan", activebackground="cyan",
+                                width=11, height=2)
         reset_score_btn.pack(side=tk.LEFT, padx=5)
         
         # Botão Sair
         quit_btn = tk.Button(control_frame, text="❌ Sair", font=("Arial", 9, "bold"),
-                           command=self.sair_jogo, bg="#f44336", fg="white", activebackground="darkred",
-                           width=11, height=2)
+                        command=self.sair_jogo, bg="#f44336", fg="white", activebackground="darkred",
+                        width=11, height=2)
         quit_btn.pack(side=tk.LEFT, padx=5)
         
         # Área de dicas
         tips_frame = tk.Frame(self.root)
-        tips_frame.pack(pady=(10, 5))
+        tips_frame.pack(pady=(5, 5))
         
         tips_label = tk.Label(tips_frame, text="💡 Dicas: F1 = Novo Jogo | F4 = Reset Rodada | F6 = Zerar Placar | ESC = Sair", 
                             font=("Arial", 9), fg="gray")
