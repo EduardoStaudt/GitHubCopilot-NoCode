@@ -21,7 +21,7 @@ class RockPaperScissorsGUI:
         """
         self.root = root
         self.root.title("Pedra, Papel e Tesoura")
-        self.root.geometry("500x400")
+        self.root.geometry("700x450")  # Aumentar mais para comportar 4 botões
         self.root.resizable(False, False)
         
         # Configurar comportamento ao fechar janela
@@ -30,6 +30,8 @@ class RockPaperScissorsGUI:
         # Atalhos de teclado
         self.root.bind('<Escape>', lambda e: self.sair_jogo())
         self.root.bind('<F5>', lambda e: self.resetar_placar())
+        self.root.bind('<F4>', lambda e: self.reset_escolha())
+        self.root.bind('<F6>', lambda e: self.resetar_placar_direto())  # Novo atalho
         
         # Variáveis do jogo
         self.pontuacao_jogador = 0
@@ -109,28 +111,34 @@ class RockPaperScissorsGUI:
         control_frame.pack(pady=15)
         
         # Botão Novo Jogo
-        new_game_btn = tk.Button(control_frame, text="🎮 Novo Jogo", font=("Arial", 11, "bold"),
+        new_game_btn = tk.Button(control_frame, text="🎮 Novo Jogo", font=("Arial", 9, "bold"),
                                 command=self.resetar_placar, bg="lightgreen", activebackground="green",
-                                width=12, height=2)
-        new_game_btn.pack(side=tk.LEFT, padx=8)
+                                width=9, height=2)
+        new_game_btn.pack(side=tk.LEFT, padx=3)
         
-        # Botão Reset - novo botão
-        reset_btn = tk.Button(control_frame, text="🔄 Reset", font=("Arial", 11, "bold"),
+        # Botão Reset Escolha
+        reset_btn = tk.Button(control_frame, text="🔄 Reset", font=("Arial", 9, "bold"),
                             command=self.reset_escolha, bg="lightyellow", activebackground="yellow",
-                            width=12, height=2)
-        reset_btn.pack(side=tk.LEFT, padx=8)
+                            width=9, height=2)
+        reset_btn.pack(side=tk.LEFT, padx=3)
         
-        # Botão Sair - melhorado
-        quit_btn = tk.Button(control_frame, text="❌ Sair", font=("Arial", 11, "bold"),
+        # Botão Reset Placar
+        reset_score_btn = tk.Button(control_frame, text="📊 Reset Placar", font=("Arial", 9, "bold"),
+                                command=self.resetar_placar_direto, bg="lightcyan", activebackground="cyan",
+                                width=9, height=2)
+        reset_score_btn.pack(side=tk.LEFT, padx=3)
+        
+        # Botão Sair
+        quit_btn = tk.Button(control_frame, text="❌ Sair", font=("Arial", 9, "bold"),
                             command=self.sair_jogo, bg="red", fg="white", activebackground="darkred",
-                            width=12, height=2)
-        quit_btn.pack(side=tk.LEFT, padx=8)
+                            width=9, height=2)
+        quit_btn.pack(side=tk.LEFT, padx=3)
         
         # Área de dicas
         tips_frame = tk.Frame(self.root)
         tips_frame.pack(pady=(10, 5))
         
-        tips_label = tk.Label(tips_frame, text="💡 Dicas: ESC = Sair | F5 = Novo Jogo | Clique no X para sair", 
+        tips_label = tk.Label(tips_frame, text="💡 Dicas: ESC = Sair | F5 = Novo Jogo | F4 = Reset | F6 = Reset Placar", 
                             font=("Arial", 9), fg="gray")
         tips_label.pack()
     
@@ -178,6 +186,15 @@ class RockPaperScissorsGUI:
         self.player_choice_label.config(text="❓")
         self.computer_choice_label.config(text="❓")
         self.result_label.config(text="Faça sua escolha!", fg="blue")
+    
+    def resetar_placar_direto(self):
+        """Reset direto do placar sem confirmação"""
+        self.pontuacao_jogador = 0
+        self.pontuacao_computador = 0
+        self.score_label.config(text="Placar: Jogador 0 - 0 Computador")
+        self.player_choice_label.config(text="❓")
+        self.computer_choice_label.config(text="❓")
+        self.result_label.config(text="Placar resetado! Faça sua escolha!", fg="blue")
     
     def resetar_placar(self):
         resposta = messagebox.askyesno("Resetar Placar", "Deseja realmente resetar o placar?")
